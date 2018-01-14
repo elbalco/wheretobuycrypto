@@ -1,3 +1,4 @@
 class Coin < ActiveRecord::Base
-  has_and_belongs_to_many :markets
+  has_many :coin_exchanges
+  has_many :exchanges, through: :coin_exchanges
 end

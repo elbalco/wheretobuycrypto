@@ -15,27 +15,40 @@ ActiveRecord::Schema.define(version: 20180109204159) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "coin_exchanges", force: :cascade do |t|
+    t.integer "coin_id"
+    t.integer "exchange_id"
+    t.string  "url"
+    t.integer "volume_24h"
+    t.index ["coin_id"], name: "index_coin_exchanges_on_coin_id", using: :btree
+    t.index ["exchange_id"], name: "index_coin_exchanges_on_exchange_id", using: :btree
+  end
+
   create_table "coins", force: :cascade do |t|
     t.string   "key"
     t.string   "name"
     t.string   "symbol"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["key"], name: "index_coins_on_key", using: :btree
   end
 
-  create_table "coins_markets", force: :cascade do |t|
-    t.integer "coin_id"
-    t.integer "market_id"
-    t.index ["coin_id"], name: "index_coins_markets_on_coin_id", using: :btree
-    t.index ["market_id"], name: "index_coins_markets_on_market_id", using: :btree
-  end
-
-  create_table "markets", force: :cascade do |t|
+  create_table "exchanges", force: :cascade do |t|
     t.string   "key"
     t.string   "name"
     t.string   "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["key"], name: "index_exchanges_on_key", using: :btree
+  end
+
+  create_table "markets", force: :cascade do |t|
+    t.integer "coin_exchange_id"
+    t.integer "coin_id"
+    t.string  "url"
+    t.integer "volume_24h"
+    t.index ["coin_exchange_id"], name: "index_markets_on_coin_exchange_id", using: :btree
+    t.index ["coin_id"], name: "index_markets_on_coin_id", using: :btree
   end
 
 end
