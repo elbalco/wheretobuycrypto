@@ -24,14 +24,6 @@ class UpdateCoinData
         volume            = row_data[3].text.gsub(/[\s$,]+/, "").to_i
 
         unless pair_coin.blank?
-
-        # p ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
-        # p pair_regex
-        # p row_data[2].text.scan(pair_regex)
-        # p row_data[2].text
-        # p pair_coin_symbol
-        # p pair_coin
-
           exchange = Exchange.find_or_create_by(key: key, name: exchange_name)
           coin_exchange = CoinExchange.find_or_create_by(coin_id: @coin.id, exchange_id: exchange.id)
           market = Market.find_or_create_by(coin_exchange_id: coin_exchange.id, coin_id: pair_coin.id)
