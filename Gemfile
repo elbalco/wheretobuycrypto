@@ -35,6 +35,9 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# ActiveRecord extensions
+gem "active_model_serializers"
+
 # External and APIs
 gem 'coinmarketcap', git: "https://github.com/victormier/coinmarketcap.git"
 
