@@ -3,6 +3,6 @@ class CoinSerializer < ActiveModel::Serializer
   has_many :exchanges
 
   def exchanges
-    object.coin_exchanges
+    object.coin_exchanges.ordered
   end
 end

@@ -3,7 +3,7 @@ class CoinExchangeSerializer < ActiveModel::Serializer
   delegate :id, :key, :name, :url, to: :exchange
 
   def markets
-    object.markets.order("volume_24h desc").map(&:coin).map(&:symbol)
+    object.markets.ordered.map(&:coin).map(&:symbol)
   end
 
   def exchange
