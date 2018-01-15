@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180109204159) do
+ActiveRecord::Schema.define(version: 20180115161358) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,8 +37,10 @@ ActiveRecord::Schema.define(version: 20180109204159) do
     t.string   "key"
     t.string   "name"
     t.string   "url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.bigint   "volume_24h"
+    t.string   "referral_url"
     t.index ["key"], name: "index_exchanges_on_key", using: :btree
   end
 
