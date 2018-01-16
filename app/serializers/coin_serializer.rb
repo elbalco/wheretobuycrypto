@@ -3,6 +3,6 @@ class CoinSerializer < ActiveModel::Serializer
   has_many :exchanges
 
   def exchanges
-    object.coin_exchanges.sort(&:volume)
+    object.coin_exchanges.sort_by(&:volume).reverse!
   end
 end
