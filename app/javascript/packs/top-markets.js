@@ -1,0 +1,41 @@
+export default [{
+  id: 2,
+  name: 'Binance',
+  cap: "$2.342.343"
+}, {
+  id: 2,
+  name: 'Ripple',
+  cap: "$1.847.222"
+}, {
+  id: 2,
+  name: 'Poloniex',
+  cap: "$942.955"
+}, {
+  id: 2,
+  name: 'Cryptopia',
+  cap: "$242.118"
+}, {
+  id: 2,
+  name: 'KuCoin',
+  cap: "$456.235"
+}, {
+  id: 2,
+  name: 'Gdax',
+  cap: "$222.587"
+}, {
+  id: 2,
+  name: 'Poloniex',
+  cap: "$942.955"
+}, {
+  id: 2,
+  name: 'Cryptopia',
+  cap: "$242.118"
+}, {
+  id: 2,
+  name: 'KuCoin',
+  cap: "$456.235"
+}, {
+  id: 2,
+  name: 'Gdax',
+  cap: "$222.587"
+}]

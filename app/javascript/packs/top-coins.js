@@ -1,0 +1,51 @@
+export default [{
+  id: 2,
+  name: 'Ethereum',
+  code: 'ETH',
+  cap: "$2.342.343"
+}, {
+  id: 2,
+  name: 'Neo',
+  code: 'NEO',
+  cap: "$1.847.222"
+}, {
+  id: 2,
+  name: 'Icon',
+  code: 'ICX',
+  cap: "$942.955"
+}, {
+  id: 2,
+  name: 'Ripple',
+  code: 'XRP',
+  cap: "$242.118"
+}, {
+  id: 2,
+  name: 'BitCoin',
+  code: 'BTC',
+  cap: "$456.235"
+}, {
+  id: 2,
+  name: 'Tron',
+  code: 'TRX',
+  cap: "$222.587"
+}, {
+  id: 2,
+  name: 'Icon',
+  code: 'ICX',
+  cap: "$942.955"
+}, {
+  id: 2,
+  name: 'Ripple',
+  code: 'XRP',
+  cap: "$242.118"
+}, {
+  id: 2,
+  name: 'Neo',
+  code: 'NEO',
+  cap: "$1.847.222"
+}, {
+  id: 2,
+  name: 'Icon',
+  code: 'ICX',
+  cap: "$942.955"
+}]
