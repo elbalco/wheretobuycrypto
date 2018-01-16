@@ -1,0 +1,193 @@
+/*
+ * Global vars
+ */
+$bg-color-dark: #212940;
+$bg-color-fun: linear-gradient(45deg, #4980a0, #2d2c82);
+$color-red: #ff5a5a;
+$primary-color: #fff;
+$secondary-color: #9ca3bc;
+$font-narrow: ff-clan-web-pro-narrow, helvetica, Tahoma;
+$font-slim: ff-clan-web-pro, helvetica, Tahoma;
+
+/*
+ * Base structure
+ */
+html,
+body {
+  height: 100%;
+  background: $bg-color-fun;
+  color: $primary-color;
+  overflow: auto;
+  font-family: $font-slim;
+}
+h1 {
+  font-family: $font-narrow;
+}
+
+header {
+  .inner {
+    padding: 20px 0;
+  }
+}
+
+footer {
+  font-size: 12px;
+}
+.logo {
+  font-family: $font-narrow;
+  font-size: 20px;
+}
+
+.component-wrapper {
+  padding-bottom: 120px;
+}
+
+.finder {
+  padding-top: 150px;
+
+  .input-area {
+    text-align: center;
+    padding-bottom: 20px;
+    -webkit-transition: padding 0.5s ease;
+            transition: padding 0.5s ease;
+  }
+
+  .search-input {
+    padding: 0 15px;
+
+    & > input {
+      font-size: 40px;
+      border: none;
+      line-height: 0;
+      background: transparent;
+      border-bottom: 2px dashed $primary-color;
+      color: $primary-color;
+      width: 200px
+    }
+
+    & > input:focus {
+      outline: none;
+    }
+  }
+
+  -webkit-transition: padding 0.5s ease;
+          transition: padding 0.5s ease;
+
+  &.filled {
+    .input-area {
+      padding-bottom: 0;
+    }
+
+    padding-top: 0;
+  }
+}
+
+.footer-info {
+  padding: 50px 0;
+  background: rgba(0, 0, 0, 0.24);
+  border-top: 1px solid #ffffff36;
+}
+.footer-text {
+  border-top: 1px solid #ffffff36;
+  padding: 10px;
+}
+
+table {
+  margin-top: 20px;
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+
+  .btn {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: white;
+    border-color: white;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.250);
+    }
+  }
+}
+
+th,
+td {
+  padding: 10px 15px;
+  background-color: rgba(255,255,255,0.2);
+  border-bottom: 1px solid transparent;
+  color: #fff;
+
+  &.marketCurrency {
+    text-align: center;
+  }
+}
+
+th {
+  text-align: left;
+}
+
+thead {
+  th {
+    background-color: #55608f;
+
+    &.smaller {
+      font-size: 10px;
+      text-align: center;
+    }
+  }
+}
+tbody {
+  tr {
+		&:hover {
+			background-color: rgba(255,255,255,0.3);
+		}
+	}
+  td {
+		position: relative;
+		&:hover {
+			&:before {
+				content: "";
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: -9999px;
+				bottom: -9999px;
+				background-color: rgba(255,255,255,0.2);
+				z-index: -1;
+			}
+		}
+	}
+}
+
+.check{
+  display:inline-block;
+  color: green;
+
+  &:after{
+    content: '';
+    display: block;
+    width: 9px;
+    height: 16px;
+    border: solid #26b77b;
+    border-width: 0 4px 4px 0;
+    transform: rotate(45deg);
+  }
+}
+
+.cross {
+}
+.cross:before, .cross:after {
+  position: absolute;
+  content: ' ';
+  height: 17px;
+  width: 5px;
+  background-color: $color-red;
+  top: 15px;
+}
+.cross:before {
+  transform: rotate(45deg);
+}
+.cross:after {
+  transform: rotate(-45deg);
+}
