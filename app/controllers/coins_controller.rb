@@ -3,9 +3,9 @@ class CoinsController < ApplicationController
     if search = params[:search]
       coins = Coin.search(params[:search])
     else
-      coins = Coin.limit(10)
+      coins = Coin.all
     end
-    render json: coins
+    render json: coins, each_serializer: BaseCoinSerializer
   end
 
   def show
