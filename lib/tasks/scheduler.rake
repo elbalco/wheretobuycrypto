@@ -9,7 +9,7 @@ namespace :scheduler do
   desc "Update data for all existing coins in db"
   task :update_all_coins => :environment do
     puts "Updating all coins..."
-    UpdateAllCoinsDataWorker.perform_async
+    UpdateAllCoinsWorker.perform_async
     puts "done."
   end
 
