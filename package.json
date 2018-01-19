@@ -11,6 +11,7 @@
     "react": "^16.2.0",
     "react-autosuggest": "^9.3.2",
     "react-dom": "^16.2.0",
+    "react_ujs": "^2.4.3",
     "request": "^2.83.0",
     "sass-loader": "^6.0.3",
     "style-loader": "^0.16.1"
