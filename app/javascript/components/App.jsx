@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import Autosuggest from 'react-autosuggest';
 import _ from 'lodash';
 import request from 'request';
+import dotenv from 'dotenv';
+
+const HOST = process.env.NODE_ENV === 'production' ? "http://www.wheretobuycrypto.io" : "http://localhost:3000"
 
 Number.prototype.formatMoney = function(c, d, t){
   var n = this,
@@ -233,7 +236,7 @@ class App extends Component {
   selectCoin (key) {
     // query api and get coin based on key
     request
-      .get(`http://localhost:3000/coins/${key}.json`, (err, response, body) => {
+      .get(`${HOST}/coins/${key}.json`, (err, response, body) => {
         if (response.statusCode === 200) {
           const coin = JSON.parse(body);
           history.pushState(null, null, `/coins/${key}`);
