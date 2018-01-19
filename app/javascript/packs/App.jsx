@@ -1,20 +1,21 @@
 import React, {Component} from 'react';
 import Autosuggest from 'react-autosuggest';
 import _ from 'lodash';
+import request from 'request';
 
 import data from './data'
 import topCoins from './top-coins'
 import topMarkets from './top-markets'
 
 Number.prototype.formatMoney = function(c, d, t){
-var n = this,
-    c = isNaN(c = Math.abs(c)) ? 2 : c,
-    d = d == undefined ? "." : d,
-    t = t == undefined ? "," : t,
-    s = n < 0 ? "-" : "",
-    i = String(parseInt(n = Math.abs(Number(n) || 0).toFixed(c))),
-    j = (j = i.length) > 3 ? j % 3 : 0;
-   return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+  var n = this,
+  c = isNaN(c = Math.abs(c)) ? 2 : c,
+  d = d == undefined ? "." : d,
+  t = t == undefined ? "," : t,
+  s = n < 0 ? "-" : "",
+  i = String(parseInt(n = Math.abs(Number(n) || 0).toFixed(c))),
+  j = (j = i.length) > 3 ? j % 3 : 0;
+  return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
  };
 
 const getSuggestions = (data, value) => {
@@ -97,60 +98,46 @@ class TopMarketsTable extends Component {
   }
 }
 
-class Card extends Component {
-
-  render () {
-    const item = this.props.item;
-    let exchanges = item.exchanges.map((market, key) => {
-      let currencies = market.markets.map((exchange, key) => {
-        let separator = key < (market.markets.length-1) ? ', ' : '';
-        return (
-          <span key={key}>{item.symbol}/{exchange}{separator}</span>
-        );
-      });
-
-      let volume = market.volume.formatMoney(2);
+const Card = ({ coin }) => {
+  const exchanges = coin.exchanges.map((market, key) => {
+    let currencies = market.markets.map((exchange, key) => {
+      let separator = key < (market.markets.length-1) ? ', ' : '';
       return (
-        <div className="card" key={key}>
-          <div className="row d-flex align-items-center">
-            <div className="col-md-3">
-              <h3>{market.name}</h3>
-            </div>
-            <div className="col-md-3">
-              <div className="card-info"><span className="money">${volume}</span><br></br>(last 24h)</div>
-            </div>
-            <div className="col-md-3">
-              <div className="card-info">{currencies}</div>
-            </div>
-            <div className="col-md-3 text-right">
-              <a className="btn" href={market.url}>buy {item.name}</a>
-            </div>
-          </div>
-        </div>
+        <span key={key}>{coin.symbol}/{exchange}{separator}</span>
       );
     });
 
+    let volume = market.volume.formatMoney(2);
     return (
-      <div>{exchanges}</div>
+      <div className="card" key={key}>
+        <div className="row d-flex align-items-center">
+          <div className="col-md-3">
+            <h3>{market.name}</h3>
+          </div>
+          <div className="col-md-3">
+            <div className="card-info"><span className="money">${volume}</span><br></br>(last 24h)</div>
+          </div>
+          <div className="col-md-3">
+            <div className="card-info">{currencies}</div>
+          </div>
+          <div className="col-md-3 text-right">
+            <a className="btn" href={market.url}>buy {coin.name}</a>
+          </div>
+        </div>
+      </div>
     );
-  }
+  });
+
+  return (
+    <div>{exchanges}</div>
+  );
 }
 
-class CardList extends Component {
-
-  render () {
-    const table = this.props.items.map((item, key) => {
-
-      return (
-        <Card key={key} item={item} />
-      )
-    })
-
-    return (
-      <div className="cardList">{table}</div>
-    );
-  }
-}
+const CardList = ({ items }) => (
+  <div className="cardList">
+    { items.map((item, key) => <Card key={key} coin={item} />) }
+  </div>
+)
 
 class Inputer extends React.Component {
   constructor() {
@@ -166,7 +153,6 @@ class Inputer extends React.Component {
     this.setState({
       value: newValue
     });
-    this.props.onChange(newValue);
   };
 
   onSuggestionsFetchRequested = ({ value }) => {
@@ -182,7 +168,7 @@ class Inputer extends React.Component {
   };
 
   onSelectOption = (e, item) => {
-    this.props.selectOption(item.suggestion.symbol);
+    this.props.selectOption(item.suggestion.key);
   };
 
   render() {
@@ -212,27 +198,25 @@ class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      searchTerm: '',
-      data: ''
+      coin: '',
+      allCoins: [],
     }
-    this.searchUpdated = this.searchUpdated.bind(this)
+    this.selectCoin = this.selectCoin.bind(this)
   }
 
   componentDidMount() {
     this.loadJSON(function(response) {
-    // Parse JSON string into object
-      var data = JSON.parse(response);
-      this.setState((prevState, props) => ({
-        searchTerm: prevState.searchTerm,
-        data: data
-      }))
-   }.bind(this));
+      // Parse JSON string into object
+      const data = JSON.parse(response);
+      console.log("data loaded");
+      this.setState({ allCoins: data });
+    }.bind(this));
   }
 
   loadJSON = (callback) => {
       var xobj = new XMLHttpRequest();
           xobj.overrideMimeType("application/json");
-      xobj.open('GET', 'src/coins.json', true); // Replace 'my_data' with the path to your file
+      xobj.open('GET', '/coins.json', true); // Replace 'my_data' with the path to your file
       xobj.onreadystatechange = function () {
             if (xobj.readyState == 4 && xobj.status == "200") {
               // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
@@ -242,21 +226,24 @@ class App extends Component {
       xobj.send(null);
    }
 
-  searchUpdated (term) {
-    this.setState({searchTerm: term})
+  selectCoin (key) {
+    // query api and get coin based on key
+    request
+      .get(`http://localhost:3000/coins/${key}`, (err, response, body) => {
+        if (response.statusCode === 200) {
+          const coin = JSON.parse(body);
+          this.setState({ coin })
+        }
+      });
   }
 
   render () {
-    const filteredMarkets = this.state.searchTerm.length > 1
-      ? getCoin(this.state.data, this.state.searchTerm)
-      : [];
-
-    const cardList = <CardList items={filteredMarkets} />
+    const { coin } = this.state;
 
     const topTables = (
       <div className="row">
         <div className="col-md-6">
-          <TopCoinsTable onClickCoin={this.searchUpdated} />
+          <TopCoinsTable onClickCoin={this.selectCoin} />
         </div>
         <div className="col-md-6">
           <TopMarketsTable />
@@ -264,20 +251,16 @@ class App extends Component {
     </div>
     );
 
-    const content = filteredMarkets.length > 0
-      ? cardList
-      : '';
-
-    const filledClass = filteredMarkets.length > 0 ? 'filled' : '';
-    const classes = `finder ${filledClass}`;
-
     return (
-      <div className={classes}>
+      <div className={`finder ${coin ? 'filled' : ''}`}>
         <div className="d-sm-flex justify-content-center input-area">
           <h1>Where to buy </h1>
-          <Inputer className="search-input" coins={this.state.data} selectOption={this.searchUpdated} onChange={this.searchUpdated}/>
+          <Inputer className="search-input" coins={this.state.allCoins} selectOption={this.selectCoin} />
         </div>
-        {content}
+        {
+          coin &&
+            <CardList items={[coin]} />
+        }
       </div>
     )
   }
