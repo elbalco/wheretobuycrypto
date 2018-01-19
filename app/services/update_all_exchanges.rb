@@ -1,7 +1,7 @@
 class UpdateAllExchanges
   def call
     Exchange.all.each do |exchange|
-      UpdateExchangeData.new(exchange).call
+      UpdateExchangeDataWorker.perform_async(exchange.id)
     end
   end
 end
