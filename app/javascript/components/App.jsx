@@ -3,10 +3,6 @@ import Autosuggest from 'react-autosuggest';
 import _ from 'lodash';
 import request from 'request';
 
-import data from './data'
-import topCoins from './top-coins'
-import topMarkets from './top-markets'
-
 Number.prototype.formatMoney = function(c, d, t){
   var n = this,
   c = isNaN(c = Math.abs(c)) ? 2 : c,
@@ -145,13 +141,15 @@ class Inputer extends React.Component {
 
     this.state = {
       value: '',
-      suggestions: []
+      suggestions: [],
+      touched: false,
     };
   }
 
   onChange = (event, { newValue }) => {
     this.setState({
-      value: newValue
+      value: newValue,
+      touched: true,
     });
   };
 
@@ -172,12 +170,18 @@ class Inputer extends React.Component {
   };
 
   render() {
-    const { value, suggestions } = this.state;
+    const { value, suggestions, touched } = this.state;
+    const { selectedCoin } = this.props;
+    let inputValue = value;
+
+    if (selectedCoin) {
+      inputValue = touched ? value : selectedCoin.symbol;
+    }
 
     const inputProps = {
       placeholder: '',
-      value,
-      onChange: this.onChange
+      value: inputValue,
+      onChange: this.onChange,
     };
 
     return (
@@ -198,7 +202,7 @@ class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      coin: '',
+      coin: props.coin,
       allCoins: [],
     }
     this.selectCoin = this.selectCoin.bind(this)
@@ -229,10 +233,11 @@ class App extends Component {
   selectCoin (key) {
     // query api and get coin based on key
     request
-      .get(`http://localhost:3000/coins/${key}`, (err, response, body) => {
+      .get(`http://localhost:3000/coins/${key}.json`, (err, response, body) => {
         if (response.statusCode === 200) {
           const coin = JSON.parse(body);
-          this.setState({ coin })
+          history.pushState(null, null, `/coins/${key}`);
+          this.setState({ coin });
         }
       });
   }
@@ -255,7 +260,7 @@ class App extends Component {
       <div className={`finder ${coin ? 'filled' : ''}`}>
         <div className="d-sm-flex justify-content-center input-area">
           <h1>Where to buy </h1>
-          <Inputer className="search-input" coins={this.state.allCoins} selectOption={this.selectCoin} />
+          <Inputer className="search-input" coins={this.state.allCoins} selectOption={this.selectCoin} selectedCoin={coin} />
         </div>
         {
           coin &&
