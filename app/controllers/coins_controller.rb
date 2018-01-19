@@ -3,14 +3,21 @@ class CoinsController < ApplicationController
     if search = params[:search]
       coins = Coin.search(params[:search])
     else
-      coins = Coin.limit(10)
+      coins = Coin.all
     end
-    render json: coins
+    render json: coins, each_serializer: BaseCoinSerializer
   end
 
   def show
-    params[:id]
-    coin = Coin.find_by(key: params[:id])
-    render json: coin
+    @coin = Coin.find_by(key: params[:id])
+
+    respond_to do |format|
+      format.html {
+        serializer = CoinSerializer.new(@coin)
+        adapter = ActiveModel::Serializer::Adapter.create(serializer)
+        @coin = adapter.as_json
+      }
+      format.json { render json: @coin }
+    end
   end
 end

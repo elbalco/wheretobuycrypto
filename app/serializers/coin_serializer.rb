@@ -1,5 +1,4 @@
-class CoinSerializer < ActiveModel::Serializer
-  attributes :id, :key, :name, :symbol
+class CoinSerializer < BaseCoinSerializer
   has_many :exchanges
 
   def exchanges
