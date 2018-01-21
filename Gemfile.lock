@@ -77,6 +77,8 @@ GEM
     ffi (1.9.18)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
+    heroku-deflater (0.6.3)
+      rack (>= 1.4.5)
     httparty (0.15.6)
       multi_xml (>= 0.5.2)
     i18n (0.9.1)
@@ -203,6 +205,7 @@ DEPENDENCIES
   byebug
   coinmarketcap!
   cryptocompare
+  heroku-deflater
   listen (~> 3.0.5)
   pg (~> 0.18)
   puma (~> 3.0)
