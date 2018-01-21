@@ -10,8 +10,7 @@
       gtag('config', 'UA-112785593-1');
     </script>
 
-    <title>Where to buy Crypto - Mobile Friendly Crypto Exchanges filter tool</title>
-
+    <title><%= @coin ? "Where to buy #{@coin[:name]} (#{@coin[:symbol]}) cryptocurrency | " : nil %>Where to buy Crypto - Mobile Friendly Crypto Exchanges filter tool</title>
     <%= csrf_meta_tags %>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
