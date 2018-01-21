@@ -12,11 +12,7 @@ class CoinsController < ApplicationController
     @coin = Coin.find_by(key: params[:id])
 
     respond_to do |format|
-      format.html {
-        serializer = CoinSerializer.new(@coin)
-        adapter = ActiveModel::Serializer::Adapter.create(serializer)
-        @coin = adapter.as_json
-      }
+      format.html
       format.json { render json: @coin }
     end
   end
