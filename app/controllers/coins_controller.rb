@@ -5,7 +5,11 @@ class CoinsController < ApplicationController
     else
       coins = Coin.all
     end
-    render json: coins, each_serializer: BaseCoinSerializer
+
+    respond_to do |format|
+      format.html
+      format.json { render json: coins, each_serializer: BaseCoinSerializer }
+    end
   end
 
   def show
