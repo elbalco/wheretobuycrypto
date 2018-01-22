@@ -3,6 +3,7 @@ import Autosuggest from 'react-autosuggest';
 import _ from 'lodash';
 import request from 'request';
 import dotenv from 'dotenv';
+import $ from 'jquery';
 
 const HOST = process.env.NODE_ENV === 'production' ? "http://www.wheretobuycrypto.io" : "http://localhost:3000"
 
@@ -241,6 +242,7 @@ class App extends Component {
           const coin = JSON.parse(body);
           history.pushState(null, null, `/coins/${key}`);
           this.setState({ coin });
+          $('.top-lists').remove();
         }
       });
   }
@@ -267,7 +269,10 @@ class App extends Component {
         </div>
         {
           coin &&
-            <CardList items={[coin]} />
+            <div>
+              <p className='coin-description'>{`You can buy ${coin.name} in ${coin.exchanges.length} exchanges.`}</p>
+              <CardList items={[coin]} />
+            </div>
         }
       </div>
     )

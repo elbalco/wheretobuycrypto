@@ -1,1 +1,4 @@
-<%= react_component("App", { coin: @coin }) %>
+<div class="component-wrapper">
+  <%= react_component("App", { coin: coin_to_json(@coin) }) %>
+</div>
+<div class="product-description">Find where to buy any cryptocurrency. We list all exchanges for 1500+ coins.</div>

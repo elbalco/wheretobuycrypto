@@ -11,6 +11,7 @@
     </script>
 
     <title><%= @coin ? "Where to buy #{@coin[:name]} (#{@coin[:symbol]}) cryptocurrency | " : nil %>Where to buy Crypto - Mobile Friendly Crypto Exchanges filter tool</title>
+    <meta name="description" content="<%= get_description %>">
     <%= csrf_meta_tags %>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -42,10 +43,9 @@
     </header>
 
     <main role="main" class="container">
-      <div class="component-wrapper">
+      <div class='main-content'>
         <%= yield %>
       </div>
-
     </main>
 
     <footer>

@@ -47,8 +47,21 @@ footer {
   font-size: 20px;
 }
 
+.main-content {
+  padding-bottom: 40px;
+}
+
 .component-wrapper {
-  padding-bottom: 120px;
+  margin-bottom: 40px;
+}
+
+.product-description {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.top-lists {
+  margin-bottom: 40px;
 }
 
 .finder {
@@ -339,4 +352,13 @@ tbody {
 
 .react-autosuggest__suggestion--focused .highlight {
   color: #120000;
+}
+
+[data-link] {
+  cursor: pointer;
+}
+
+.coin-description {
+  text-align: center;
+  margin: 2rem 0;
 }
