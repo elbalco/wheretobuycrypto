@@ -340,3 +340,12 @@ tbody {
 .react-autosuggest__suggestion--focused .highlight {
   color: #120000;
 }
+
+.product-description {
+  text-align: center;
+  padding: 40px 0;
+}
+
+[data-link] {
+  cursor: pointer;
+}
