@@ -5,7 +5,7 @@ import request from 'request';
 import dotenv from 'dotenv';
 import $ from 'jquery';
 
-const HOST = process.env.NODE_ENV === 'production' ? "http://www.wheretobuycrypto.io" : "http://localhost:3000"
+const HOST = process.env.NODE_ENV === 'production' ? `${window.location.protocol}//www.wheretobuycrypto.io` : `${window.location.protocol}//localhost:3000`
 
 Number.prototype.formatMoney = function(c, d, t){
   var n = this,
