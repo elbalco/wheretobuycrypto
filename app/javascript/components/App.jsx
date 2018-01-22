@@ -269,7 +269,10 @@ class App extends Component {
         </div>
         {
           coin &&
-            <CardList items={[coin]} />
+            <div>
+              <p className='coin-description'>{`You can buy ${coin.name} in ${coin.exchanges.length} exchanges.`}</p>
+              <CardList items={[coin]} />
+            </div>
         }
       </div>
     )
