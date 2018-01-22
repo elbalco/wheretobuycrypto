@@ -19,5 +19,20 @@
     </table>
   </div>
   <div class="col-md-6">
+    <table class='top-list'>
+      <thead>
+        <tr>
+          <th colSpan="999">Top Exchanges</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @exchanges.ordered.each do |exchange| %>
+          <tr data-link="<%= exchange.url %>">
+            <td><%= exchange.name %></td>
+            <td><%= number_to_currency(exchange.volume_24h, precision: 0, unit: "$") %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 </div>

@@ -3,6 +3,7 @@ class CoinsController < ApplicationController
     respond_to do |format|
       format.html {
         @coins = Coin.ordered.limit(10)
+        @exchanges = Exchange.volume_not_nil.ordered.limit(10)
       }
       format.json {
         if search = params[:search]
