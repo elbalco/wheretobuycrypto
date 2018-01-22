@@ -28,7 +28,7 @@
         </tr>
       </thead>
       <tbody>
-        <% @exchanges.ordered.each do |exchange| %>
+        <% @exchanges.each do |exchange| %>
           <tr data-link="<%= exchange.url %>">
             <td><%= exchange.name %></td>
             <td><%= number_to_currency(exchange.volume_24h, precision: 0, unit: "$") %></td>
