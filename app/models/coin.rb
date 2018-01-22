@@ -8,4 +8,7 @@ class Coin < ActiveRecord::Base
     Coin.where("key ILIKE ? OR name ILIKE ? OR symbol ILIKE ?", "%#{param}%","%#{param}%","%#{param}%")
   end
 
+  def to_param
+    key
+  end
 end
