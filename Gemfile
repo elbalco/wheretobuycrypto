@@ -27,6 +27,7 @@ gem "active_model_serializers"
 # External and APIs
 gem 'coinmarketcap', git: "https://github.com/victormier/coinmarketcap.git"
 gem 'cryptocompare'
+gem 'twitter'
 
 # Workers / Background jobs
 gem 'sidekiq'
