@@ -75,6 +75,10 @@ GEM
       json
     domain_name (0.5.20170404)
       unf (>= 0.0.5, < 1.0.0)
+    dotenv (2.2.1)
+    dotenv-rails (2.2.1)
+      dotenv (= 2.2.1)
+      railties (>= 3.2, < 5.2)
     equalizer (0.0.11)
     erubis (2.7.0)
     execjs (2.7.0)
@@ -239,6 +243,7 @@ DEPENDENCIES
   byebug
   coinmarketcap!
   cryptocompare
+  dotenv-rails
   heroku-deflater
   listen (~> 3.0.5)
   pg (~> 0.18)
