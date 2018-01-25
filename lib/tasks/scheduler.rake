@@ -19,4 +19,11 @@ namespace :scheduler do
     UpdateAllExchangesWorker.perform_async
     puts "done."
   end
+
+  desc "Tweet top gainers"
+  task :tweet_gainers => :environment do
+    puts "Tweeting top gainers..."
+    TweetGainersWorker.perform_async
+    puts "done."
+  end
 end
