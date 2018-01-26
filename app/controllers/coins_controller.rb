@@ -1,9 +1,9 @@
 class CoinsController < ApplicationController
+
   def index
     respond_to do |format|
       format.html {
-        @coins = Coin.ordered.limit(10)
-        @exchanges = Exchange.volume_not_nil.ordered.limit(10)
+        @coins = Coin.ordered.paginate(page: params[:page], per_page: 50)
       }
       format.json {
         if search = params[:search]
@@ -24,4 +24,5 @@ class CoinsController < ApplicationController
       format.json { render json: @coin }
     end
   end
+
 end

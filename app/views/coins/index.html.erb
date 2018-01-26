@@ -1,40 +1,23 @@
-<div class="component-wrapper">
-  <%= react_component("App") %>
-</div>
-<div class="product-description">Find where to buy any cryptocurrency. We list all exchanges for 1500+ coins.</div>
-<div class="row top-lists">
-  <div class="col-md-6">
-    <table class='top-list'>
-      <thead>
-        <tr>
-          <th colSpan="999">Top Coins</th>
+<div>
+  <table class=''>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Sybmol</th>
+        <th>Market cap</th>
+        <th>Volume 24h</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @coins.each do |coin| %>
+        <tr data-link="<%= coin_path(coin) %>">
+          <td><%= coin.name %></td>
+          <td><%= coin.symbol %></td>
+          <td><%= number_to_currency(coin.market_cap, precision: 0, unit: "$") %></td>
+          <td><%= number_to_currency(coin.volume_24h, precision: 0, unit: "$") %></td>
         </tr>
-      </thead>
-      <tbody>
-        <% @coins.each do |coin| %>
-          <tr data-link="<%= coin_path(coin) %>">
-            <td><%= coin.name %></td>
-            <td><%= coin.symbol %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-  <div class="col-md-6">
-    <table class='top-list'>
-      <thead>
-        <tr>
-          <th colSpan="999">Top Exchanges</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @exchanges.each do |exchange| %>
-          <tr data-link="<%= exchange.url %>">
-            <td><%= exchange.name %></td>
-            <td><%= number_to_currency(exchange.volume_24h, precision: 0, unit: "$") %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
+      <% end %>
+    </tbody>
+  </table>
+  <%= will_paginate @coins, :inner_window => 1 %>
 </div>

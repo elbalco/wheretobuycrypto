@@ -13,5 +13,5 @@ Rails.application.routes.draw do
 
   resources :coins, only: [:index, :show]
 
-  root to: 'coins#index'
+  root to: 'home#index'
 end
