@@ -1,0 +1,20 @@
+<div>
+  <p class="coin-description">Listing <%= number_with_precision(@exchanges.total_entries, precision: 0, delimiter: '.') %> Exchanges right now.</p>
+  <table class=''>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Volume 24h</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @exchanges.each do |exchange| %>
+        <tr data-link="<%= exchange.url %>">
+          <td><%= link_to exchange.name, exchange.url %></td>
+          <td><%= number_to_currency(exchange.volume_24h, precision: 0, unit: "$") %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= will_paginate @exchanges, inner_window: 1 %>
+</div>

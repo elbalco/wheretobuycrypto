@@ -33,8 +33,8 @@ a {
 }
 
 header {
-  .inner {
-    padding: 20px 0;
+  .nav-item {
+    font-size: 12px;
   }
 }
 
@@ -45,6 +45,14 @@ footer {
 .logo {
   font-family: $font-narrow;
   font-size: 20px;
+  a:hover {
+    text-decoration: none;
+    opacity: .7;
+  }
+}
+
+.main-navbar {
+  padding-top: 0.3125rem;
 }
 
 .main-content {
@@ -196,7 +204,11 @@ thead {
 }
 tbody {
   tr {
-		&:hover {
+    a:hover {
+      text-decoration: none;
+    }
+
+    &:hover {
 			background-color: rgba(255,255,255,0.3);
 		}
 	}
@@ -256,6 +268,37 @@ tbody {
 }
 .cross:after {
   transform: rotate(-45deg);
+}
+
+
+// pagination
+.pagination {
+  background: #545f8e;
+  text-align: center;
+  padding: 1em;
+  cursor: default;
+  a, span {
+    padding: 0 0.3em;
+  }
+  .disabled {
+    color: #aaaaaa;
+  }
+  .current {
+    font-style: normal;
+    font-weight: bold;
+    display: inline-block;
+    width: 1.4em;
+    height: 1.4em;
+    line-height: 1.5;
+    opacity: .6
+  }
+  a {
+    text-decoration: none;
+    color: white;
+  }
+  a:hover, a:focus {
+    text-decoration: underline;
+  }
 }
 
 

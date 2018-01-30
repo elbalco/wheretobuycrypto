@@ -32,11 +32,19 @@
   </head>
 
   <body>
-    <header class="header clearfix">
-      <div class="container">
-        <div class="inner">
-          <span class="logo"><%= link_to "wheretobuycrypto.io", root_path %></span>
-        </div>
+    <header class="header clearfix navbar navbar-expand navbar-dark">
+      <div class="container d-flex justify-content-between">
+
+          <span class="logo navbar-brand"><%= link_to "wheretobuycrypto.io", root_path %></span>
+          <ul class="navbar-nav main-navbar flex-row ml-md-auto d-none d-md-flex">
+              <li class="nav-item">
+                <a class="nav-link <%= current_page_class(coins_path) %>" href="<%= coins_path() %>" onclick="ga('send', 'event', 'Navbar', 'Internal links', 'Coins');">All Coins</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link <%= current_page_class(exchanges_path) %>" href="<%= exchanges_path() %>" onclick="ga('send', 'event', 'Navbar', 'Internal links', 'Exchanges');">All Exchanges</a>
+              </li>
+          </ul>
+
       </div>
     </header>
 
