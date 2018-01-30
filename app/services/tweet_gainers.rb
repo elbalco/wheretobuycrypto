@@ -17,8 +17,8 @@ class TweetGainers
         end
         tweet << " #{coin["currency"]["name"]} $#{coin["currency"]["symbol"]} #{coin["priceChange"]}%\n"
       end
-      tweet << "\nFIND WHERE TO BUY THEM HERE: https://www.wheretobuycrypto.io \n\n"
-      tweet << "#cryptocurrency #alts #bitcoin #ToTheMoon #HODL #CryptoNews"
+      tweet << "\nWHERE TO BUY THEM HERE: https://www.wheretobuycrypto.io \n\n"
+      tweet << "#cryptocurrency #ToTheMoon #CryptoNews"
       PublishTweet.perform_async(tweet)
     end
   end
