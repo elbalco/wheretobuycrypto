@@ -12,7 +12,7 @@
     <tbody>
       <% @coins.each do |coin| %>
         <tr data-link="<%= coin_path(coin) %>">
-          <td><%= coin.name %></td>
+          <td><%= link_to coin.name, coin_path(coin) %></td>
           <td><%= coin.symbol %></td>
           <td><%= number_to_currency(coin.market_cap, precision: 0, unit: "$") %></td>
           <td><%= number_to_currency(coin.volume_24h, precision: 0, unit: "$") %></td>
