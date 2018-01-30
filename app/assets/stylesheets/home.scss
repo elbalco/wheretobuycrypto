@@ -45,6 +45,14 @@ footer {
 .logo {
   font-family: $font-narrow;
   font-size: 20px;
+  a:hover {
+    text-decoration: none;
+    opacity: .7;
+  }
+}
+
+.main-navbar {
+  padding-top: 0.3125rem;
 }
 
 .main-content {

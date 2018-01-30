@@ -1,4 +1,8 @@
 module ApplicationHelper
+  def cp(path)
+    "active" if current_page?(path)
+  end
+
   def coin_to_json(coin)
     serializer = CoinSerializer.new(coin)
     adapter = ActiveModel::Serializer::Adapter.create(serializer)
