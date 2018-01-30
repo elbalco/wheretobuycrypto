@@ -15,6 +15,7 @@
           <tr data-link="<%= coin_path(coin) %>">
             <td><%= coin.name %></td>
             <td><%= coin.symbol %></td>
+            <td><%= number_to_currency(coin.market_cap, precision: 0, unit: "$") %></td>
           </tr>
         <% end %>
       </tbody>
