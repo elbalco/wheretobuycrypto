@@ -1,0 +1,19 @@
+<div>
+  <table class=''>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Volume 24h</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @exchanges.each do |exchange| %>
+        <tr data-link="<%= exchange.url %>">
+          <td><%= exchange.name %></td>
+          <td><%= number_to_currency(exchange.volume_24h, precision: 0, unit: "$") %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= will_paginate @exchanges, :inner_window => 1 %>
+</div>

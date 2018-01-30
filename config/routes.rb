@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   mount Sidekiq::Web, at: "/sidekiq"
 
   resources :coins, only: [:index, :show]
+  resources :exchanges, only: [:index]
 
   root to: 'home#index'
 end
