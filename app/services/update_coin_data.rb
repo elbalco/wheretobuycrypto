@@ -25,7 +25,16 @@ class UpdateCoinData
 
         unless pair_coin.blank?
           exchange = Exchange.find_or_create_by(key: key, name: exchange_name)
-          coin_exchange = CoinExchange.find_or_create_by(coin_id: @coin.id, exchange_id: exchange.id)
+          coin_exchange = CoinExchange.find_or_initialize_by(coin_id: @coin.id, exchange_id: exchange.id)
+          if coin_exchange.new_record?
+            coin_exchange.save
+            if @coin.created_at >= 1.day.ago
+              perform_at = (rand * 120).round.minutes.from_now
+              tweet_text = "#{@coin.name} $#{@coin.symbol} was just listed on ##{exchange.key}!🚀\n\n" +
+                           "Find where you can buy #{@coin.symbol} here: #{coin_url(@coin)}"
+              PublishTweet.perform_at(perform_at, tweet_text)
+            end
+          end
           market = Market.find_or_create_by(coin_exchange_id: coin_exchange.id, coin_id: pair_coin.id)
           market.update_attributes(url: market_url, volume_24h: volume)
         end
