@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180122145301) do
+ActiveRecord::Schema.define(version: 20180203171758) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,17 @@ ActiveRecord::Schema.define(version: 20180122145301) do
     t.integer  "rank"
     t.decimal  "price"
     t.index ["key"], name: "index_coins_on_key", using: :btree
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.integer  "coin_id"
+    t.integer  "exchange_id"
+    t.datetime "will_happen_at"
+    t.text     "data"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["coin_id"], name: "index_events_on_coin_id", using: :btree
+    t.index ["exchange_id"], name: "index_events_on_exchange_id", using: :btree
   end
 
   create_table "exchanges", force: :cascade do |t|
