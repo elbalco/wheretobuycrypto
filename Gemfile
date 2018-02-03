@@ -36,6 +36,7 @@ gem 'sidekiq'
 gem 'heroku-deflater', :group => :production
 gem 'will_paginate', '~> 3.1.1'
 gem 'dotenv-rails'
+gem 'sitemap_generator'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
