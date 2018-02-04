@@ -4,6 +4,7 @@ import _ from 'lodash';
 import request from 'request';
 import dotenv from 'dotenv';
 import $ from 'jquery';
+import moment from 'moment';
 
 const HOST = process.env.NODE_ENV === 'production' ? `${window.location.protocol}//www.wheretobuycrypto.io` : `${window.location.protocol}//localhost:3000`
 
@@ -99,6 +100,7 @@ class TopMarketsTable extends Component {
 }
 
 const Card = ({ coin }) => {
+
   const exchanges = coin.exchanges.map((market, key) => {
     let currencies = market.markets.map((exchange, key) => {
       let separator = key < (market.markets.length-1) ? ', ' : '';
@@ -121,7 +123,26 @@ const Card = ({ coin }) => {
             <div className="card-info">{currencies}</div>
           </div>
           <div className="col-md-3 text-right">
-            <a className="btn" href={market.url}>buy {coin.name}</a>
+            <a className="btn float-right" href={market.url}>buy {coin.name}</a>
+          </div>
+        </div>
+      </div>
+    );
+  });
+
+  const futures = coin.events.map((event, key) => {
+    return (
+      <div className="card card-highlighted" key={key}>
+        <div className="ribbon"><span>NEW</span></div>
+        <div className="row d-flex align-items-center">
+          <div className="col-md-3">
+            <h3>{event.exchange.name}</h3>
+          </div>
+          <div className="col-md-6">
+            <div className="card-info">Upcoming listing on {moment(event.will_happen_at, "YYYY-MM-DD").format('MMMM Do')}</div>
+          </div>
+          <div className="col-md-3 text-right">
+            <a className="btn float-right" href={event.exchange.url}>Get it here</a>
           </div>
         </div>
       </div>
@@ -129,7 +150,10 @@ const Card = ({ coin }) => {
   });
 
   return (
-    <div>{exchanges}</div>
+    <div>
+      {futures}
+      {exchanges}
+    </div>
   );
 }
 
