@@ -139,10 +139,10 @@ const Card = ({ coin }) => {
             <h3>{event.exchange.name}</h3>
           </div>
           <div className="col-md-6">
-            <div className="card-info">Upcoming listing on {moment(event.will_happen_at, "YYYY-MM-DD").format('MMMM Do')}</div>
+            <div className="card-info">Upcoming listing on {moment(event.will_happen_at, "YYYY-MM-DD").format('MMMM Do')}!</div>
           </div>
           <div className="col-md-3 text-right">
-            <a className="btn float-right" href={event.exchange.url}>Get it here</a>
+            <a className="btn float-right" href={event.exchange.url}>Sign up here</a>
           </div>
         </div>
       </div>
