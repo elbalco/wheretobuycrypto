@@ -26,4 +26,11 @@ namespace :scheduler do
     TweetGainersWorker.perform_async
     puts "done."
   end
+
+  desc "Fetch future events"
+  task :fetch_events => :environment do
+    puts "Fetching events..."
+    FetchEventsWorker.perform_async
+    puts "done."
+  end
 end
