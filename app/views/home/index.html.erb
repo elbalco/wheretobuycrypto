@@ -3,29 +3,29 @@
 </div>
 <div class="product-description">Find where to buy any cryptocurrency. We list all exchanges for 1500+ coins.</div>
 <div class="row top-lists">
-  <div class="col-md-6">
+  <div class="col-md-8">
     <table class='top-list'>
       <thead>
         <tr>
-          <th colSpan="999">Top Coins</th>
+          <th colSpan="999">Upcoming Listings</th>
         </tr>
       </thead>
       <tbody>
-        <% @coins.each do |coin| %>
-          <tr data-link="<%= coin_path(coin) %>">
-            <td><%= link_to coin.name, coin_path(coin) %></td>
-            <td><%= coin.symbol %></td>
-            <td><%= number_to_currency(coin.market_cap, precision: 0, unit: "$") %></td>
+        <% @events.each do |event| %>
+          <tr data-link="<%= event.exchange.url %>">
+            <td><%= link_to event.exchange.name, event.exchange.url %></td>
+            <td>[<%= event.coin.symbol %>] <%= link_to event.coin.name, coin_path(event.coin) %></td>
+            <td><%= event.will_happen_at.strftime("%B #{event.will_happen_at.day.ordinalize}") %></td>
           </tr>
         <% end %>
       </tbody>
     </table>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-4">
     <table class='top-list'>
       <thead>
         <tr>
-          <th colSpan="999">Top Exchanges</th>
+          <th colSpan="999">Top Exchanges (last 24h)</th>
         </tr>
       </thead>
       <tbody>

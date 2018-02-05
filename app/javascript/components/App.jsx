@@ -43,62 +43,6 @@ const getCoin = (data, symbol) => {
   );
 };
 
-class TopCoinsTable extends Component {
-
-  onClickCoin = (code) => {
-    this.props.onClickCoin(code);
-  }
-
-  render () {
-    const coins = topCoins.map((coin, key) => {
-      return (
-        <tr key={key}>
-          <td onClick={this.onClickCoin.bind(this, coin.code)}>{coin.name}</td>
-          <td>{coin.code}</td>
-        </tr>
-      )
-    });
-    return (
-      <table>
-        <thead>
-          <tr>
-            <th colSpan="999">Top Coins</th>
-          </tr>
-        </thead>
-        <tbody>
-          {coins}
-        </tbody>
-      </table>
-    );
-  }
-}
-
-class TopMarketsTable extends Component {
-
-  render () {
-    const markets = topMarkets.map((market, key) => {
-      return (
-        <tr key={key} href="#">
-          <td>{market.name}</td>
-          <td>{market.cap}</td>
-        </tr>
-      )
-    });
-    return (
-      <table>
-        <thead>
-          <tr>
-            <th colSpan="999">Top Markets</th>
-          </tr>
-        </thead>
-        <tbody>
-          {markets}
-        </tbody>
-      </table>
-    );
-  }
-}
-
 const Card = ({ coin }) => {
 
   const exchanges = coin.exchanges.map((market, key) => {
@@ -273,17 +217,6 @@ class App extends Component {
 
   render () {
     const { coin } = this.state;
-
-    const topTables = (
-      <div className="row">
-        <div className="col-md-6">
-          <TopCoinsTable onClickCoin={this.selectCoin} />
-        </div>
-        <div className="col-md-6">
-          <TopMarketsTable />
-        </div>
-    </div>
-    );
 
     return (
       <div className={`finder ${coin ? 'filled' : ''}`}>
